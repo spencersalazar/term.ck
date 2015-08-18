@@ -5,6 +5,9 @@ Helper class for ANSI terminal commands, e.g. text/background color, bold text, 
 ## Getting Started 
     $ chuck term.ck term-example.ck
 
+[term-example.ck](http://i.imgur.com/8OPaLuM.gif "term-example.ck")
+
+
 ## Documentation
 
 See term.ck for all possible options. 
