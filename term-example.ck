@@ -21,7 +21,6 @@ chout <= term.bgcyan() + term.black() + "bg cyan" + term.reset() <= IO.nl();
 chout <= term.bgwhite() + term.black() + "bg white" + term.reset() <= IO.nl();
 chout <= term.standout() + term.bgred() + "standout bg red" + term.reset() <= IO.nl();
 
-chout <= term.saveCursor(); chout.flush();
 chout <= term.reset() + "wait for it"; chout.flush();
 0.5::second => now;
 chout <= "."; chout.flush();
@@ -32,5 +31,36 @@ chout <= "."; chout.flush();
 0.5::second => now;
 chout <= term.back(14); chout.flush();
 chout <= term.clearLine(); chout.flush();
+
 chout <= term.reset() + "- CLEAR -" + term.reset() <= IO.nl();
+chout <= term.back(14); chout.flush();
+chout <= term.clearLine(); chout.flush();
+
+1.62::second => now;
+
+["-", "\\", "|", "/"] @=> string cycle[];
+
+for(int i; i < 50; i++)
+{
+    chout <= cycle[i%cycle.cap()] <= " ";
+    chout <= term.bggreen()<= term.bold();
+    chout <= term.black() <= " the " <= term.blue() <= "time" <= term.black() <= " is " <= term.blue() <= "now ";
+    chout <= term.reset();
+    chout <= " " <= cycle[cycle.cap()-((i+3)%cycle.cap()+1)];
+    chout.flush();
+
+    0.1::second => now;
+    
+    chout <= term.back(21); chout.flush();
+    chout <= term.clearLine(); chout.flush();
+}
+
+chout <= "* ";
+chout <= term.bggreen()<= term.bold();
+chout <= term.black() <= " the " <= term.blue() <= "time" <= term.black() <= " is " <= term.blue() <= "now ";
+chout <= term.reset();
+chout <= " *" <= IO.nl();
+chout.flush();
+
+
 
